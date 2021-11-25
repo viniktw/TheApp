@@ -1,0 +1,2 @@
+<?php
+$companyName = 'Company Name';
