@@ -1,0 +1,72 @@
+
+Vagrant.configure("2") do |config|
+
+    # CHEFSERVER
+    config.vm.define "chefserver" do |chefserver|
+        chefserver.vm.box = "bento/ubuntu-20.04"
+        chefserver.vm.hostname = "chefserver"
+        chefserver.vm.network "forwarded_port", guest: 80, host: 8080
+        chefserver.vm.network "forwarded_port", guest: 443, host: 8443
+        chefserver.vm.network :private_network, ip: "192.168.56.20"
+        chefserver.vm.provider "virtualbox" do |vb|
+            vb.gui = false
+            vb.memory = "4096"
+        end
+
+        chefserver.vm.provision "shell", path: "chef/provision.sh"
+    end
+
+    # PROXY
+    config.vm.define "proxyserver" do |proxyserver|
+        proxyserver.vm.box = "bento/ubuntu-20.04"
+        proxyserver.vm.hostname = "proxyserver"
+        proxyserver.vm.network :private_network, ip: "192.168.56.30"
+        proxyserver.vm.provider "virtualbox" do |vb|
+            vb.gui = false
+            vb.memory = "1024"
+        end
+    end
+
+    # WEBSERVERS
+    config.vm.define "webserver1" do |webserver|
+        webserver.vm.box = "bento/ubuntu-20.04"
+        webserver.vm.hostname = "webserver1"
+        webserver.vm.network :private_network, ip: "192.168.56.40"
+        webserver.vm.provider "virtualbox" do |vb|
+            vb.gui = false
+            vb.memory = "1024"
+        end
+    end
+    config.vm.define "webserver2" do |webserver|
+        webserver.vm.box = "bento/ubuntu-20.04"
+        webserver.vm.hostname = "webserver2"
+        webserver.vm.network :private_network, ip: "192.168.56.50"
+        webserver.vm.provider "virtualbox" do |vb|
+            vb.gui = false
+            vb.memory = "1024"
+        end
+    end
+    config.vm.define "webserver3" do |webserver|
+        webserver.vm.box = "bento/ubuntu-20.04"
+        webserver.vm.hostname = "webserver3"
+        webserver.vm.network :private_network, ip: "192.168.56.60"
+        webserver.vm.provider "virtualbox" do |vb|
+            vb.gui = false
+            vb.memory = "1024"
+        end
+    end
+
+    # CHEF WORKSTATION
+    config.vm.define "workstation" do |workstation|
+        workstation.vm.box = "bento/ubuntu-20.04"
+        workstation.vm.hostname = "workstation"
+        workstation.vm.network :private_network, ip: "192.168.56.70"
+        workstation.vm.provider "virtualbox" do |vb|
+            vb.gui = false
+            vb.memory = "2048"
+        end
+
+        # workstation.vm.provision "shell", path: "chef/configure_workstation.sh"
+    end
+end
+    
