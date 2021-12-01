@@ -4,10 +4,7 @@ sudo dpkg -i chef-workstation*.deb
 chef generate repo chef-repo
 mkdir ~/chef-repo/.chef
 cd ~/chef-repo
-#ssh-keygen -b 4096
-#ssh-copy-id USER@SERVER
-# copy the PEM files from your server to your client 
-#scp USER@CLIENTIP:~/.chef/*.pem ~/chef-repo/.chef/
-# add version control 
-#git config --global user.name NAME
-#git config --global user.email EMAIL
+
+knife configure
+
+knife ssl fetch

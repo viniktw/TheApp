@@ -25,6 +25,8 @@ Vagrant.configure("2") do |config|
             vb.gui = false
             vb.memory = "1024"
         end
+        proxyserver.vm.provision "shell",
+            inline: "sudo apt-get update"
     end
 
     # WEBSERVERS
@@ -36,6 +38,8 @@ Vagrant.configure("2") do |config|
             vb.gui = false
             vb.memory = "1024"
         end
+        webserver.vm.provision "shell",
+            inline: "sudo apt-get update"
     end
     config.vm.define "webserver2" do |webserver|
         webserver.vm.box = "bento/ubuntu-20.04"
@@ -45,6 +49,8 @@ Vagrant.configure("2") do |config|
             vb.gui = false
             vb.memory = "1024"
         end
+        webserver.vm.provision "shell",
+            inline: "sudo apt-get update"
     end
     config.vm.define "webserver3" do |webserver|
         webserver.vm.box = "bento/ubuntu-20.04"
@@ -54,6 +60,8 @@ Vagrant.configure("2") do |config|
             vb.gui = false
             vb.memory = "1024"
         end
+        webserver.vm.provision "shell",
+            inline: "sudo apt-get update"
     end
 
     # CHEF WORKSTATION
@@ -67,6 +75,8 @@ Vagrant.configure("2") do |config|
         end
 
         # workstation.vm.provision "shell", path: "chef/configure_workstation.sh"
+        workstation.vm.provision "shell",
+            inline: "sudo apt-get update"
     end
 end
     
